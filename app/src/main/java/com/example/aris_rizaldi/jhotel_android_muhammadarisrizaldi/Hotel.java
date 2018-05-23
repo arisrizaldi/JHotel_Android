@@ -5,44 +5,45 @@ public class Hotel {
     private String nama;
     private Lokasi lokasi;
     private int bintang;
+    public Hotel(String nama, Lokasi lokasi, int bintang,int id){
+        this.id=id;
+        this.nama=nama;
+        this.lokasi=lokasi;
+        this.bintang=bintang;
 
-    public Hotel(int id, String nama, Lokasi lokasi, int bintang) {
-        this.id = id;
-        this.nama = nama;
-        this.lokasi = lokasi;
-        this.bintang = bintang;
+    }
+    public void setID(int id){
+        this.id=id;
+    }
+    public void setNama(String nama){
+        this.nama=nama;
+
+    }
+    public void setLokasi(Lokasi lokasi){
+        this.lokasi=lokasi;
+
+    }
+    public void setBintang(int bintang){
+        this.bintang=bintang;
+
     }
 
-    public int getId() {
+
+
+    public int getID(){
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNama() {
+    public String getNama(){
         return nama;
-    }
 
-    public void setNama(String nama) {
-        this.nama = nama;
     }
-
-    public Lokasi getLokasi() {
+    public Lokasi getLokasi(){
         return lokasi;
-    }
 
-    public void setLokasi(Lokasi lokasi) {
-        this.lokasi = lokasi;
     }
-
-    public int getBintang() {
+    public int getBintang(){
         return bintang;
-    }
 
-    public void setBintang(int bintang) {
-        this.bintang = bintang;
     }
-
 }
+

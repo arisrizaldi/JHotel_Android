@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelesaiPesananActivity"
+    >
+
+    <TextView
+        android:id="@+id/staticID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/id"
+        android:layout_marginStart="83dp"
+        android:text="ID Pesanan :" />
+
+
+    <TextView
+        android:id="@+id/staticBiaya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/staticID"
+        android:layout_marginTop="154dp"
+        android:text="Biaya :" />
+
+
+    <TextView
+        android:id="@+id/staticHari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/staticID"
+        android:layout_alignTop="@+id/hari"
+        android:text="Jumlah Hari :" />
+
+    <TextView
+        android:id="@+id/staticTgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/staticID"
+        android:layout_marginTop="196dp"
+        android:text="Tanggal :" />
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="41dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="82dp"
+        android:layout_marginTop="68dp" />
+
+    <TextView
+        android:id="@+id/biaya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/id"
+        android:layout_alignTop="@+id/staticBiaya" />
+
+    <TextView
+        android:id="@+id/hari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/id"
+        android:layout_marginTop="107dp" />
+
+    <TextView
+        android:id="@+id/tanggal"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/staticTgl"
+        android:layout_marginEnd="-130dp"
+        android:layout_toStartOf="@+id/krmBtn" />
+
+    <Button
+        android:id="@+id/btlBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/staticID"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="203dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Batal" />
+
+    <Button
+        android:id="@+id/krmBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/btlBtn"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Konfirmasi" />
+
+
+</RelativeLayout>

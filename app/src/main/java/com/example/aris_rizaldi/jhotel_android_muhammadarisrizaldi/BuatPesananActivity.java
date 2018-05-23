@@ -1,7 +1,7 @@
 package com.example.aris_rizaldi.jhotel_android_muhammadarisrizaldi;
 
-import android.app.AlertDialog;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,65 +17,97 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class BuatPesananActivity extends AppCompatActivity {
-    private int currentUserid, banyakHari, idHotel;
+
+    private int currentUserid;
+    private int banyakHari;
+    private int idHotel;
     private double tariff;
     private String roomNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buat_pesanan);
-        final TextView textViewRoomNumber = findViewById(R.id.room_number);
-        final TextView textViewTariff = findViewById(R.id.tariff);
-        final TextView textViewTotalBiaya = findViewById(R.id.total_biaya);
-        final EditText durasiInput = findViewById(R.id.durasi_hari);
-        final Button pesanButton = findViewById(R.id.pesan);
-        final Button hitungButton = findViewById(R.id.hitung);
-        pesanButton.setVisibility(View.INVISIBLE);
-        textViewRoomNumber.setText(roomNumber);
-        textViewTariff.setText(String.valueOf(tariff));
-        textViewTotalBiaya.setText("0");
 
-        Intent buatPesananIntent = getIntent();
-        currentUserid = buatPesananIntent.getIntExtra("id_customer",0);
-        idHotel = buatPesananIntent.getIntExtra("id_hotel",0);
-        roomNumber = buatPesananIntent.getStringExtra("nomor_kamar");
+        final Button hitungBtn = (Button) findViewById(R.id.hitung);
+        final Button pesanBtn = (Button) findViewById(R.id.pesan);
+        final TextView ttlBiaya = (TextView) findViewById(R.id.total_biaya);
+        final TextView tarif = (TextView) findViewById(R.id.tariff);
+        final TextView room_number = (TextView) findViewById(R.id.room_number);
+        final EditText durasi = (EditText) findViewById(R.id.durasi_hari);
 
-        hitungButton.setOnClickListener(new View.OnClickListener() {
+        currentUserid = getIntent().getIntExtra("id_customer",0);
+        roomNumber = getIntent().getStringExtra("room_number");
+        idHotel = getIntent().getIntExtra("id_hotel",0);
+        tariff = getIntent().getDoubleExtra("dailyTariff",0);
+        pesanBtn.setVisibility(View.INVISIBLE);
+        room_number.setText(roomNumber);
+        tarif.setText(String.valueOf(tariff));
+        ttlBiaya.setText("0");
+
+
+
+        hitungBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                banyakHari = Integer.parseInt(durasiInput.getText().toString());
-                textViewTotalBiaya.setText(String.valueOf(tariff*banyakHari));
-                hitungButton.setVisibility(View.INVISIBLE);
-                pesanButton.setVisibility(View.VISIBLE);
-            }
-        });
+            public void onClick(View v) {
+                banyakHari = Integer.valueOf(durasi.getText().toString());
+                ttlBiaya.setText(String.valueOf(tariff*banyakHari));
+                hitungBtn.setVisibility(View.INVISIBLE);
+                pesanBtn.setVisibility(View.VISIBLE);
+                System.out.println(banyakHari);
+                System.out.println(currentUserid);
+                System.out.println(idHotel);
+                System.out.println(roomNumber);
+                System.out.println(ttlBiaya);
 
-        pesanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Response.Listener<String> responseListener = new Response.Listener<String> () {
+
+
+                pesanBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject jsonResponse = new JSONObject(response);
-                            if(jsonResponse!=null) {
-                                AlertDialog builder = new AlertDialog.Builder(BuatPesananActivity.this).create();
-                                //AlertDialog test = new AlertDialog.Builder(LoginActivity.this).create();
-                                builder.setMessage("Pesan Sukses");
-                                builder.show();
+                    public void onClick(View v) {
+                        Response.Listener<String> responseListener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(response);
+                                    if (jsonResponse!= null) {
+
+                                        System.out.println("3");
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(BuatPesananActivity.this);
+                                        builder.setMessage("Pesanan Berhasil diproses")
+                                                .create()
+                                                .show();
+
+                                        Intent regisInt = new Intent(BuatPesananActivity.this, MainActivity.class);
+                                        BuatPesananActivity.this.startActivity(regisInt);
+
+
+
+                                    }
+                                }
+                                catch (JSONException e) {
+
+                                    System.out.println("4");
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(BuatPesananActivity.this);
+                                    builder.setMessage("Pesanan Gagal diproses")
+                                            .create()
+                                            .show();
+                                    hitungBtn.setVisibility(View.VISIBLE);
+                                    pesanBtn.setVisibility(View.INVISIBLE);
+                                }
                             }
-                        } catch (JSONException e) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(BuatPesananActivity.this);
-                            builder.setMessage("Pesan Gagak.").create().show();
-                        }
+                        };
+
+                        System.out.println("5");
+                        BuatPesananRequest pesananRequest = new BuatPesananRequest(banyakHari,currentUserid,idHotel,roomNumber,responseListener);
+                        RequestQueue queue = Volley.newRequestQueue(BuatPesananActivity.this);
+                        queue.add(pesananRequest);
                     }
-                };
-                BuatPesananRequest buatPesanRequest = new BuatPesananRequest
-                        (String.valueOf(banyakHari),String.valueOf(currentUserid),String.valueOf(idHotel),roomNumber, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(BuatPesananActivity.this);
-                queue.add(buatPesanRequest);
+                });
             }
         });
+
     }
 }

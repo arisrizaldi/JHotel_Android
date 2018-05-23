@@ -1,5 +1,6 @@
 package com.example.aris_rizaldi.jhotel_android_muhammadarisrizaldi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -20,17 +21,17 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        final EditText FullNameInput = (EditText) findViewById(R.id.FullNameInput);
-        final EditText emailInput = (EditText) findViewById(R.id.inputEmail);
-        final EditText passInput = (EditText) findViewById(R.id.inputPass);
+        final EditText nameInput = (EditText) findViewById(R.id.nameInput);
+        final EditText emailInput = (EditText) findViewById(R.id.emailInput);
+        final EditText passInput = (EditText) findViewById(R.id.passInput);
         final Button buttonRegis = (Button) findViewById(R.id.buttonRegis);
         buttonRegis.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View V) {
-                String name = FullNameInput.getText().toString();
-                String email = emailInput.getText().toString();
-                String pass = passInput.getText().toString();
+                final String name = nameInput.getText().toString();
+                final String email = emailInput.getText().toString();
+                final String password = passInput.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String> ()
                 {
@@ -43,6 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 builder.setMessage("Registration Success")
                                         .create()
                                         .show();
+                                Intent regisInt = new Intent(RegisterActivity.this, LoginActivity.class);
+                                RegisterActivity.this.startActivity(regisInt);
                             }
                         }
                         catch (JSONException e)
@@ -54,8 +57,9 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 };
-                RegisterRequest registerRequest = new RegisterRequest(name,email,pass,responseListener);
-                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this); queue.add(registerRequest);
+                RegisterRequest registerRequest = new RegisterRequest(name,email,password,responseListener);
+                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                queue.add(registerRequest);
 
 
             }
@@ -63,3 +67,4 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 }
+

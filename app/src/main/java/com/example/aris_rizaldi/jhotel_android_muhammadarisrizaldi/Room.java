@@ -1,53 +1,47 @@
 package com.example.aris_rizaldi.jhotel_android_muhammadarisrizaldi;
 
 public class Room {
-
     private String roomNumber;
     private String statusKamar;
     private double dailyTariff;
     private String tipeKamar;
+    public Room(  String tipeKamar,String roomNumber,String statusKamar,double dailyTariff){
+        this.roomNumber=roomNumber;
+        this.statusKamar=statusKamar;
+        this.dailyTariff=dailyTariff;
+        this.tipeKamar=tipeKamar;
 
-    /**
-     * Constructor for objects of class Room
-     */
-    public Room(String nomor_kamar,String statusKamar, double dailyTariff, String tipeKamar)
-    {
-        this.roomNumber = nomor_kamar;
-        this.statusKamar = statusKamar;
-        this.dailyTariff = dailyTariff;
-        this.tipeKamar = tipeKamar;
+    }
+    public void setRoomNumber(String roomNumber){
+        this.roomNumber=roomNumber;
+    }
+    public void setStatusKamar(String statusKamar){
+        this.statusKamar=statusKamar;
+
+    }
+    public void setDailyTariff(double dailyTariff){
+        this.dailyTariff=dailyTariff;
+
+    }
+    public void setTipeKamar(String tipeKamar){
+        this.tipeKamar=tipeKamar;
+
     }
 
-    public String getRoomNumber() {
+
+    public String getRoomNumber(){
         return roomNumber;
     }
-
-    public double getDailyTariff() {
-        return dailyTariff;
-    }
-
     public String getStatusKamar(){
         return statusKamar;
-    }
 
+    }
+    public double getDailyTariff(){
+        return dailyTariff;
+
+    }
     public String getTipeKamar(){
         return tipeKamar;
-    }
 
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public void setDailyTariff(double dailytariff) {
-        dailyTariff = dailytariff;
-    }
-
-    public void setStatusKamar(String status_kamar) {
-        this.statusKamar = status_kamar;
-    }
-
-    public void setTipeKamar(String tipeKamar) {
-        this.tipeKamar = tipeKamar;
     }
 }
-
