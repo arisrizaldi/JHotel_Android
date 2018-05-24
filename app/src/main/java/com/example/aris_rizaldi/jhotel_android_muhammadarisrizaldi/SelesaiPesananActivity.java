@@ -33,7 +33,8 @@ public class SelesaiPesananActivity extends AppCompatActivity {
     private TextView tglPesan;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selesai_pesanan);
 
